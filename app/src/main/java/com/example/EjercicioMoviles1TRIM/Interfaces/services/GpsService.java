@@ -1,4 +1,4 @@
-package com.example.navigationdrawerpractica.Interfaces.services;
+package com.example.EjercicioMoviles1TRIM.Interfaces.services;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
@@ -14,9 +14,9 @@ import android.provider.Settings;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import static com.example.navigationdrawerpractica.Interfaces.common.Constants.INTENT_LOCALIZATION_ACTION;
-import static com.example.navigationdrawerpractica.Interfaces.common.Constants.LONGITUDE;
-import static com.example.navigationdrawerpractica.Interfaces.common.Constants.LATITUDE;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.INTENT_LOCALIZATION_ACTION;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.LONGITUDE;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.LATITUDE;
 
 public class GpsService extends Service implements LocationListener {
 

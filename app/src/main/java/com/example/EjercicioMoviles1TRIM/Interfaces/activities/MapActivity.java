@@ -1,4 +1,4 @@
-package com.example.navigationdrawerpractica.Interfaces.activities;
+package com.example.EjercicioMoviles1TRIM.Interfaces.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
-import com.example.navigationdrawerpractica.R;
+import com.example.EjercicioMoviles1TRIM.R;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
@@ -19,10 +19,10 @@ import org.osmdroid.views.overlay.OverlayItem;
 import java.util.ArrayList;
 
 
-import static com.example.navigationdrawerpractica.Interfaces.common.Constants.LONGITUDE;
-import static com.example.navigationdrawerpractica.Interfaces.common.Constants.LATITUDE;
-import static com.example.navigationdrawerpractica.Interfaces.activities.MainActivity.DESCRIPTION_KEY;
-import static com.example.navigationdrawerpractica.Interfaces.activities.MainActivity.TITLE_KEY;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.LONGITUDE;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.LATITUDE;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.activities.MainActivity.DESCRIPTION_KEY;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.activities.MainActivity.TITLE_KEY;
 
 public class MapActivity extends AppCompatActivity {
 

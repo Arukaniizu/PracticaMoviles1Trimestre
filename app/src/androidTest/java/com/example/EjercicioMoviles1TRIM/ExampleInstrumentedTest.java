@@ -1,4 +1,4 @@
-package com.example.navigationdrawerpractica;
+package com.example.EjercicioMoviles1TRIM;
 
 import android.content.Context;
 

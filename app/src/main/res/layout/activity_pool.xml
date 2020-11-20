@@ -5,12 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Interfaces.activities.PokemonActivity">
+    tools:context=".Interfaces.activities.PoolActivity">
 
     <ListView
-        android:id="@+id/lvPokemon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="7dp" />
+        android:id="@+id/lvPiscinas"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

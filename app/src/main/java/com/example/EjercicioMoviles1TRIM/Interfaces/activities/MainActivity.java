@@ -1,4 +1,4 @@
-package com.example.navigationdrawerpractica.Interfaces.activities;
+package com.example.EjercicioMoviles1TRIM.Interfaces.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -21,14 +21,18 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.navigationdrawerpractica.Interfaces.common.Constants;
-import com.example.navigationdrawerpractica.Interfaces.domain.JsonResponsive;
-import com.example.navigationdrawerpractica.Interfaces.domain.PoolList;
-import com.example.navigationdrawerpractica.Interfaces.iface.PoolApi;
-import com.example.navigationdrawerpractica.Interfaces.services.GpsService;
-import com.example.navigationdrawerpractica.R;
+
+import com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants;
+import com.example.EjercicioMoviles1TRIM.Interfaces.common.PoolAdapter;
+import com.example.EjercicioMoviles1TRIM.Interfaces.domain.JsonResponsive;
+import com.example.EjercicioMoviles1TRIM.Interfaces.domain.PoolList;
+
+import com.example.EjercicioMoviles1TRIM.Interfaces.iface.PoolApi;
+import com.example.EjercicioMoviles1TRIM.Interfaces.services.GpsService;
+import com.example.EjercicioMoviles1TRIM.R;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,9 +41,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.navigationdrawerpractica.Interfaces.common.Constants.INTENT_LOCALIZATION_ACTION;
-import static com.example.navigationdrawerpractica.Interfaces.common.Constants.LONGITUDE;
-import static com.example.navigationdrawerpractica.Interfaces.common.Constants.LATITUDE;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.INTENT_LOCALIZATION_ACTION;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.LONGITUDE;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.LATITUDE;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -50,9 +54,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String DESCRIPTION = "Tu posicion actual";
 
     private List<PoolList> mPoolList;
+    private ArrayList<PoolList> rellenarPoolList;
+    PoolList poolList;
+    PoolAdapter poolAdapter;
     Double latitude = 0.0;
     Double longitude = 0.0;
-    String title;
+    int  distance;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
@@ -96,8 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(locationIntent);
         }
         if (menuItem.getItemId() == R.id.personas) {
-            Toast.makeText(this, "HOLAAAA", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, PokemonActivity.class);
+            Intent intent = new Intent(MainActivity.this, PoolActivity.class);
             startActivity(intent);
         }
         if (menuItem.getItemId() == R.id.home2) {
@@ -134,26 +140,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-  /*  public void getPools() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-            PoolApi poolApi =retrofit.create(PoolApi.class);
-
-            poolApi.getListPool(title, latitude, longitude).enqueue(new Callback<JsonResponsive>() {
-                @Override
-                public void onResponse(Call<JsonResponsive> call, Response<JsonResponsive> response) {
-                    if (response != null && response.body() != null){
-                    mPoolList = response.body().results;
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<JsonResponsive> call, Throwable t) {
-
-                }
-            });
-    }*/
 }
