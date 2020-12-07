@@ -2,8 +2,7 @@
     <string name="app_name">NavigationDrawerPractica</string>
     <string name="open">open</string>
     <string name="close">close</string>
-
-
+    <string name="btnGuardar">SAVE LOCATE</string>
     <string name="gps_granted">Permiso GPS concedido</string>
     <string name="gps_denied">Permiso GPS denegado</string>
 </resources>
