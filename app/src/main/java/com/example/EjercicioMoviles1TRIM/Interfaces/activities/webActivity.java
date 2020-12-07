@@ -30,14 +30,23 @@ public class webActivity extends AppCompatActivity {
             webView.setWebViewClient(new WebViewClient());
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setAppCacheEnabled(true);
-            webView.loadUrl("https://www.marca.com/");
+            webView.loadUrl("https://www.comunidad.madrid/servicios/deportes");
         }else if (paginaWeb == 2){
             webView.setWebViewClient(new WebViewClient());
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setAppCacheEnabled(true);
-            webView.loadUrl("https://as.com/");
-        }else{
-            Toast.makeText(this, "MAL!!!", Toast.LENGTH_SHORT).show();
+            webView.loadUrl("https://www.comunidad.madrid/servicios/deportes/portal-inscripcion-actividades-reserva-espacios-deportivos");
+        }else if (paginaWeb == 3){
+            webView.setWebViewClient(new WebViewClient());
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setAppCacheEnabled(true);
+            webView.loadUrl("https://www.esmadrid.com/piscinas-de-verano-en-madrid?utm_referrer=https%3A%2F%2Fwww.google.com%2F");
+        }else if(paginaWeb == 4){
+            webView.setWebViewClient(new WebViewClient());
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setAppCacheEnabled(true);
+            webView.loadUrl("https://www.marca.com/");
+
         }
 
     }

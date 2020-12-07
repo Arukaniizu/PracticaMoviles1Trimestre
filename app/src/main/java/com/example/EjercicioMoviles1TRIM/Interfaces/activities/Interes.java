@@ -24,10 +24,10 @@ public class Interes extends AppCompatActivity {
 
         listView = findViewById(R.id.listViewid);
         webs = new ArrayList<>();
+        webs.add("Deportes comunidad de madrid");
+        webs.add("Inscripcion actividades deportivas");
+        webs.add("Piscinas Madrid");
         webs.add("Marca");
-        webs.add("AS");
-        webs.add("Sport");
-        webs.add("El mundo");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, webs);
 
