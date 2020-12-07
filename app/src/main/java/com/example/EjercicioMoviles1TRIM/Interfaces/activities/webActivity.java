@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
-
 import com.example.EjercicioMoviles1TRIM.R;
-
-
-
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.MADRIDSPORTS;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.MADRIDRESERVAS;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.MADRIDPISCINAS;
+import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.MARCA;
 public class webActivity extends AppCompatActivity {
     int paginaWeb;
     @Override
@@ -30,22 +30,22 @@ public class webActivity extends AppCompatActivity {
             webView.setWebViewClient(new WebViewClient());
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setAppCacheEnabled(true);
-            webView.loadUrl("https://www.comunidad.madrid/servicios/deportes");
+            webView.loadUrl(MADRIDSPORTS);
         }else if (paginaWeb == 2){
             webView.setWebViewClient(new WebViewClient());
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setAppCacheEnabled(true);
-            webView.loadUrl("https://www.comunidad.madrid/servicios/deportes/portal-inscripcion-actividades-reserva-espacios-deportivos");
+            webView.loadUrl(MADRIDRESERVAS);
         }else if (paginaWeb == 3){
             webView.setWebViewClient(new WebViewClient());
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setAppCacheEnabled(true);
-            webView.loadUrl("https://www.esmadrid.com/piscinas-de-verano-en-madrid?utm_referrer=https%3A%2F%2Fwww.google.com%2F");
+            webView.loadUrl(MADRIDPISCINAS);
         }else if(paginaWeb == 4){
             webView.setWebViewClient(new WebViewClient());
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setAppCacheEnabled(true);
-            webView.loadUrl("https://www.marca.com/");
+            webView.loadUrl(MARCA);
 
         }
 
