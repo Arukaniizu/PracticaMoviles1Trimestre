@@ -106,8 +106,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, PoolActivity.class);
             startActivity(intent);
         }
-        if (menuItem.getItemId() == R.id.home2) {
-            Toast.makeText(this, "SOY UN TOAST!!!", Toast.LENGTH_SHORT).show();
+        if (menuItem.getItemId() == R.id.paginasInteres) {
+            Intent intent = new Intent(MainActivity.this, Interes.class);
+            startActivity(intent);
         }
         return false;
     }

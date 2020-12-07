@@ -14,16 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.EjercicioMoviles1TRIM.Interfaces.activities.PoolActivity"></activity>
+        <activity android:name=".Interfaces.activities.webActivity"></activity>
+        <activity android:name=".Interfaces.activities.Interes" />
+        <activity android:name=".Interfaces.activities.PoolActivity" />
 
         <service
-            android:name="com.example.EjercicioMoviles1TRIM.Interfaces.services.GpsService"
+            android:name=".Interfaces.services.GpsService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name="com.example.EjercicioMoviles1TRIM.Interfaces.activities.MapActivity" />
+        <activity android:name=".Interfaces.activities.MapActivity" />
         <activity
-            android:name="com.example.EjercicioMoviles1TRIM.Interfaces.activities.MainActivity"
+            android:name=".Interfaces.activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

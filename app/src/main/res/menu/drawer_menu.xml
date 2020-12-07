@@ -21,9 +21,9 @@
                 android:title="home"/>
 
             <item
-                android:id="@+id/personas2"
+                android:id="@+id/paginasInteres"
                 android:icon="@drawable/ic_group_black_24dp"
-                android:title="personas"/>
+                android:title="Ver paginas de interes"/>
         </menu>
     </item>
 </menu>
