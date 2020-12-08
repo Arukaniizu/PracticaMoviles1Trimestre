@@ -60,7 +60,7 @@ public class PoolActivity extends AppCompatActivity {
                 .build();
 
         PoolApi poolApi =retrofit.create(PoolApi.class);
-        //llamamos al metodo de la api
+
         poolApi.getListPool(distance, latitude, longitude).enqueue(new Callback<JsonResponsive>() {
             @Override
             //Aqui solicitamos los datos del getlistpool y cogemos los datos.

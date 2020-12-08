@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             locationIntent.putExtra(LONGITUDE, longitude);
             startActivity(locationIntent);
         }
-        if (menuItem.getItemId() == R.id.personas) {
+        if (menuItem.getItemId() == R.id.centrosDeportivos) {
             Intent intent = new Intent(MainActivity.this, PoolActivity.class);
             startActivity(intent);
         }

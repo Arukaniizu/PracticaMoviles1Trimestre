@@ -7,18 +7,27 @@
                 android:id="@+id/home"
                 android:icon="@drawable/ic_location"
                 android:title="Location"/>
+
             <item
-                android:id="@+id/personas"
+                android:id="@+id/centrosDeportivos"
                 android:icon="@drawable/ic_group_black_24dp"
-                android:title="personas"/>
+                android:title="Ver lista de Centros deportivos"/>
+            <item
+                android:id="@+id/piscinas"
+                android:icon="@drawable/ic_group_black_24dp"
+                android:title="Ver lista de piscinas"/>
         </menu>
     </item>
-    <item android:title="Secundario">
+    <item android:title="Favoritos">
         <menu>
             <item
-                android:id="@+id/home2"
-                android:icon="@drawable/ic_home_black_24dp"
-                android:title="home"/>
+                android:id="@+id/miFavorito"
+                android:icon="@drawable/ic_location"
+                android:title="Ver mi posicion favorita"/>
+            <item
+                android:id="@+id/CentrosPiscinasFavoritos"
+                android:icon="@drawable/ic_location"
+                android:title="Ver mis piscinas y centros favoritos"/>
 
             <item
                 android:id="@+id/paginasInteres"
