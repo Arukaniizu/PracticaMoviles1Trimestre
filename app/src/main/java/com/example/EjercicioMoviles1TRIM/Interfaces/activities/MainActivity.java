@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String TITLE = "Te encuentras aqui";
     public static final String DESCRIPTION_KEY = "DESCRIPTION_KEY";
     public static final String DESCRIPTION = "Tu posicion actual";
+    public static final String POSICIONFAVORITA = "Tu posicion favorita";
 
     private List<PoolList> mPoolList;
     private ArrayList<PoolList> rellenarPoolList;
@@ -105,6 +106,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (menuItem.getItemId() == R.id.centrosDeportivos) {
             Intent intent = new Intent(MainActivity.this, PoolActivity.class);
             startActivity(intent);
+        }
+        if(menuItem.getItemId() == R.id.miPosicionFavorita){
+            Log.d(TAG, "Value of latitude: ".concat(String.valueOf(latitude)));
+            Intent locationIntent = new Intent(MainActivity.this, MapActivity.class);
+            locationIntent.putExtra(TITLE_KEY, TITLE);
+            locationIntent.putExtra(DESCRIPTION_KEY, DESCRIPTION);
+            locationIntent.putExtra(LATITUDE, latitude);
+            locationIntent.putExtra(LONGITUDE, longitude);
+            startActivity(locationIntent);
         }
         if (menuItem.getItemId() == R.id.paginasInteres) {
             Intent intent = new Intent(MainActivity.this, Interes.class);

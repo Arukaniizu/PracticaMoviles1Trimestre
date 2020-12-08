@@ -21,7 +21,7 @@
     <item android:title="Favoritos">
         <menu>
             <item
-                android:id="@+id/miFavorito"
+                android:id="@+id/miPosicionFavorita"
                 android:icon="@drawable/ic_location"
                 android:title="Ver mi posicion favorita"/>
             <item

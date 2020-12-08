@@ -31,7 +31,7 @@ import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.LATI
 import static com.example.EjercicioMoviles1TRIM.Interfaces.activities.MainActivity.DESCRIPTION_KEY;
 import static com.example.EjercicioMoviles1TRIM.Interfaces.activities.MainActivity.TITLE_KEY;
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivityDos extends AppCompatActivity {
 
     private final String TAG = getClass().getName();
     private MapView mMapView;
@@ -78,7 +78,7 @@ public class MapActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences =getSharedPreferences("ubicacion", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 Gson gson = new Gson();
-                Toast.makeText(MapActivity.this, "Guardada la ubicación actual", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MapActivityDos.this, "Guardada la ubicación actual", Toast.LENGTH_SHORT).show();
 
                 String guardar = sharedPreferences.getString("coordenadas", "");
                 locationModel = gson.fromJson(guardar, LocationModel.class);
