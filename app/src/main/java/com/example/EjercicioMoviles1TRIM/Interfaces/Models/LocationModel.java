@@ -1,6 +1,8 @@
 package com.example.EjercicioMoviles1TRIM.Interfaces.Models;
 
-public class LocationModel {
+import java.io.Serializable;
+
+public class LocationModel implements Serializable {
 
     Double latitude;
     Double longitude;

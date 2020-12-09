@@ -2,7 +2,9 @@ package com.example.EjercicioMoviles1TRIM.Interfaces.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,6 +30,8 @@ public class Interes extends AppCompatActivity {
         webs.add("Inscripcion actividades deportivas");
         webs.add("Piscinas Madrid");
         webs.add("Marca");
+
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, webs);
 

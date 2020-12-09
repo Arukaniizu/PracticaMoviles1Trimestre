@@ -15,6 +15,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import com.example.EjercicioMoviles1TRIM.Interfaces.Models.LocationModel;
 import com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants;
 import com.example.EjercicioMoviles1TRIM.Interfaces.common.PoolAdapter;
 import com.example.EjercicioMoviles1TRIM.Interfaces.domain.JsonResponsive;
@@ -31,6 +33,7 @@ import com.example.EjercicioMoviles1TRIM.Interfaces.iface.PoolApi;
 import com.example.EjercicioMoviles1TRIM.Interfaces.services.GpsService;
 import com.example.EjercicioMoviles1TRIM.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String TITLE = "Te encuentras aqui";
     public static final String DESCRIPTION_KEY = "DESCRIPTION_KEY";
     public static final String DESCRIPTION = "Tu posicion actual";
-    public static final String POSICIONFAVORITA = "Tu posicion favorita";
 
     private List<PoolList> mPoolList;
     private ArrayList<PoolList> rellenarPoolList;
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
-
+        LocationModel locationModel = new LocationModel();
         if (PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -89,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter(INTENT_LOCALIZATION_ACTION));
+
+
+
     }
 
     @Override
@@ -109,12 +115,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if(menuItem.getItemId() == R.id.miPosicionFavorita){
             Log.d(TAG, "Value of latitude: ".concat(String.valueOf(latitude)));
-            Intent locationIntent = new Intent(MainActivity.this, MapActivity.class);
-            locationIntent.putExtra(TITLE_KEY, TITLE);
-            locationIntent.putExtra(DESCRIPTION_KEY, DESCRIPTION);
-            locationIntent.putExtra(LATITUDE, latitude);
-            locationIntent.putExtra(LONGITUDE, longitude);
-            startActivity(locationIntent);
+            Intent locationIntentDos = new Intent(MainActivity.this, MapActivityDos.class);
+            startActivity(locationIntentDos);
         }
         if (menuItem.getItemId() == R.id.paginasInteres) {
             Intent intent = new Intent(MainActivity.this, Interes.class);

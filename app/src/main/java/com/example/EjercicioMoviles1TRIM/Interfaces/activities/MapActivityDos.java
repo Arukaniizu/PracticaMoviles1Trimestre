@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.EjercicioMoviles1TRIM.Interfaces.Models.LocationModel;
@@ -42,16 +40,23 @@ public class MapActivityDos extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Toast.makeText(this, "MAP ACTIVITY 2", Toast.LENGTH_SHORT).show();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentView(R.layout.activity_map_dos);
+
+        SharedPreferences sharedPreferences =getSharedPreferences("ubicacion", Context.MODE_PRIVATE);
+        String recoger = sharedPreferences.getString("myLocation", "null");
+        Gson gson = new Gson();
+        locationModel = gson.fromJson(recoger, LocationModel.class);
+
+
 
         Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
 
         Intent getDataIntent = getIntent();
-        geoPointMyPosition = new GeoPoint(getDataIntent.getDoubleExtra(LATITUDE, 0), getDataIntent.getDoubleExtra(LONGITUDE, 0));
+        geoPointMyPosition = new GeoPoint( locationModel.getLatitude(), locationModel.getLongitude());
         generateOpenStreetMapViewAndMapController();
-        locationModel.setLatitude(getDataIntent.getDoubleExtra(LATITUDE, 0));
-        locationModel.setLongitude(getDataIntent.getDoubleExtra(LONGITUDE, 0));
         boolean add = mOverlayItems.add(new OverlayItem(getDataIntent.getStringExtra(TITLE_KEY), getDataIntent.getStringExtra(DESCRIPTION_KEY), geoPointMyPosition));
 
         ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(mOverlayItems, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
@@ -68,23 +73,6 @@ public class MapActivityDos extends AppCompatActivity {
 
         mOverlay.setFocusItemsOnTap(true);
         mMapView.getOverlays().add(mOverlay);
-
-
-        Button botonFavorito = findViewById(R.id.botonFavorito);
-
-        botonFavorito.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences sharedPreferences =getSharedPreferences("ubicacion", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                Gson gson = new Gson();
-                Toast.makeText(MapActivityDos.this, "Guardada la ubicación actual", Toast.LENGTH_SHORT).show();
-
-                String guardar = sharedPreferences.getString("coordenadas", "");
-                locationModel = gson.fromJson(guardar, LocationModel.class);
-
-            }
-        });
     }
 
     private void generateOpenStreetMapViewAndMapController() {

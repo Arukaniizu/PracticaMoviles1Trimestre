@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -45,6 +46,9 @@ public class MapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+
+
+
         Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
 
         Intent getDataIntent = getIntent();
@@ -75,13 +79,14 @@ public class MapActivity extends AppCompatActivity {
         botonFavorito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences =getSharedPreferences("ubicacion", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                Toast.makeText(MapActivity.this, locationModel +"", Toast.LENGTH_SHORT).show();
+                SharedPreferences prefs =  getSharedPreferences("Ubicacion",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
                 Gson gson = new Gson();
+                String locationString = gson.toJson(locationModel);
+                editor.putString("myLocation", locationString);
+                editor.commit();
                 Toast.makeText(MapActivity.this, "Guardada la ubicación actual", Toast.LENGTH_SHORT).show();
-
-                String guardar = sharedPreferences.getString("coordenadas", "");
-                locationModel = gson.fromJson(guardar, LocationModel.class);
 
             }
         });
