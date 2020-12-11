@@ -40,8 +40,6 @@ public class MapActivityDos extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Toast.makeText(this, "MAP ACTIVITY 2", Toast.LENGTH_SHORT).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_dos);
 
