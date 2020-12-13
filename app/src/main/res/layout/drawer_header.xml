@@ -11,7 +11,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/gohan_cara1"
+        android:src="@drawable/logo"
         android:paddingRight="20dp"
         />
     <TextView

@@ -74,8 +74,9 @@ public class MapActivity extends AppCompatActivity {
         mMapView.getOverlays().add(mOverlay);
 
 
-        Button botonFavorito = findViewById(R.id.botonFavorito);
 
+        //Enviar el objeto location al SharedPreference.
+        Button botonFavorito = findViewById(R.id.botonFavorito);
         botonFavorito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

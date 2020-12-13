@@ -55,14 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String TITLE = "Te encuentras aqui";
     public static final String DESCRIPTION_KEY = "DESCRIPTION_KEY";
     public static final String DESCRIPTION = "Tu posicion actual";
-
-    private List<PoolList> mPoolList;
-    private ArrayList<PoolList> rellenarPoolList;
-    PoolList poolList;
-    PoolAdapter poolAdapter;
     Double latitude = 0.0;
     Double longitude = 0.0;
-    int  distance;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
@@ -83,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
         LocationModel locationModel = new LocationModel();
+
         if (PackageManager.PERMISSION_GRANTED != ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)) {
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
@@ -92,9 +87,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter(INTENT_LOCALIZATION_ACTION));
-
-
-
     }
 
     @Override

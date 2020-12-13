@@ -43,15 +43,13 @@ public class MapActivityDos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_dos);
 
+        //recoger ubicacion del Shared con el modelo locationModel
         SharedPreferences sharedPreferences =getSharedPreferences("ubicacion", Context.MODE_PRIVATE);
         String recoger = sharedPreferences.getString("myLocation", "null");
         Gson gson = new Gson();
         locationModel = gson.fromJson(recoger, LocationModel.class);
 
-
-
         Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
-
         Intent getDataIntent = getIntent();
         geoPointMyPosition = new GeoPoint( locationModel.getLatitude(), locationModel.getLongitude());
         generateOpenStreetMapViewAndMapController();
