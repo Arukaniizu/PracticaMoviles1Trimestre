@@ -2,21 +2,26 @@ package com.example.EjercicioMoviles1TRIM.Interfaces.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants;
+import com.example.EjercicioMoviles1TRIM.Interfaces.common.PiscinasAdapter;
 import com.example.EjercicioMoviles1TRIM.Interfaces.common.PoolAdapter;
-import com.example.EjercicioMoviles1TRIM.Interfaces.domain.JsonResponsive;
+import com.example.EjercicioMoviles1TRIM.Interfaces.domain.JsonResponse;
+import com.example.EjercicioMoviles1TRIM.Interfaces.domain.Lugar;
 import com.example.EjercicioMoviles1TRIM.Interfaces.domain.PoolList;
-import com.example.EjercicioMoviles1TRIM.Interfaces.iface.PoolApi;
+import com.example.EjercicioMoviles1TRIM.Interfaces.iface.ApiMadrid;
 import com.example.EjercicioMoviles1TRIM.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,54 +39,131 @@ public class PoolActivity extends AppCompatActivity {
     Double latitude = 40.4173208;
     Double longitude = -3.7063557;
     int  distance = 8000;
+    private List<Lugar> mLugarList;
+    private PiscinasAdapter mPiscinaAdapter;
+
+    private ListView mListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pool);
-        piscinasLv = findViewById(R.id.lvPiscinas);
-        getPools();
-        piscinasLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            //i es la posicion en la que gas clickado y el long es la id de la posicion
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(PoolActivity.this, "opcion " + i, Toast.LENGTH_LONG).show();
-                //   IN MEMORIAN
-                //Log.d("Posicion", "Has seleccionado la opcion ");
-            }
+
+        //Intent getData = getIntent();
+        //Toast.makeText(getApplicationContext(), String.valueOf(getData.getStringExtra("time")), Toast.LENGTH_SHORT).show();
+
+        getAllPiscinas();
+        mListView = findViewById(R.id.listViewPiscina);
+        mListView.setOnCreateContextMenuListener((contextMenu, view, contextMenuInfo) -> {
+            contextMenu.add(0, 1 , 0,"Add to favorites");
+            contextMenu.add(0, 2 , 0,"Go to");
         });
+        /*mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //String valor = String.valueOf(mPiscinaAdapter.getItemId(i));
+                Lugar lugar = (Lugar) mPiscinaAdapter.getItem(i);
+                addFavorite(lugar);
+                //String titulo = lugar.getTitle();
+                //Toast.makeText(SwimActivity.this, titulo , Toast.LENGTH_SHORT).show();
+
+            }
+        });*/
     }
 
-    public void getPools() {
-        rellenarPoolList = new ArrayList<>();
-        //llamamos al retrofit llamamos a la api y lo convertimos
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        if(item.getItemId() == 1){
+            Lugar lugar = (Lugar) mPiscinaAdapter.getItem(info.position);
+            addFavorite(lugar);
+        }else if(item.getItemId() == 2){
+            Toast.makeText(this, "Boton2", Toast.LENGTH_SHORT).show();
+        }
+        return true;
+    }
+
+    private Boolean checkExistFavorite(ArrayList<Lugar> favorites, Lugar lugar){
+        for (Lugar l: favorites){
+            if (l.getId() == lugar.getId()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void addFavorite(Lugar lugar){
+        ArrayList<Lugar> favorites = getFavorites();
+
+        if(favorites == null){
+            favorites = new ArrayList<>();
+        }else{
+            if(checkExistFavorite(favorites, lugar)){
+                favorites.add(lugar);
+            }
+        }
+        saveFavorites(favorites);
+    }
+
+    private ArrayList<Lugar> getFavorites() {
+        SharedPreferences preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        List<Lugar> favorites;
+
+        if (preferences.contains("favorites")) {
+            String jsonFavorites = preferences.getString("favorites", null);
+            Gson gson = new Gson();
+            Lugar[] favoriteItems = gson.fromJson(jsonFavorites, Lugar[].class);
+
+            favorites = Arrays.asList(favoriteItems);
+            favorites = new ArrayList<>(favorites);
+        } else{
+            return null;
+        }
+        return (ArrayList<Lugar>) favorites;
+    }
+
+    private void saveFavorites(ArrayList<Lugar> favorites){
+        SharedPreferences preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        Gson gson = new Gson();
+        String json = gson.toJson(favorites);
+        editor.putString("favorites", json);
+        editor.commit();
+
+        Toast.makeText(PoolActivity.this, "Añadido a favoritos" , Toast.LENGTH_SHORT).show();
+    }
+
+    private void removeFavorite(Lugar lugar) {
+        ArrayList<Lugar> favorites = getFavorites();
+        if (favorites != null) {
+            favorites.remove(lugar);
+            saveFavorites(favorites);
+        }
+    }
+
+
+
+    private void getAllPiscinas(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        PoolApi poolApi =retrofit.create(PoolApi.class);
+        ApiMadrid apiMadrid = retrofit.create(ApiMadrid.class);
+        apiMadrid.getPisicnasList().enqueue(new Callback<JsonResponse>() {
+            //Hace una peticion y se van generando los datos
+            @Override
+            public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
+                mLugarList = response.body().graph;
 
-        poolApi.getListPool(distance, latitude, longitude).enqueue(new Callback<JsonResponsive>() {
-            @Override
-            //Aqui solicitamos los datos del getlistpool y cogemos los datos.
-            public void onResponse(Call<JsonResponsive> call, Response<JsonResponsive> response) {
-                if (response != null && response.body() != null){
-                    mPoolList = response.body().results;
-                    for (PoolList x:mPoolList) {
-                        poolList = new PoolList();
-                        poolList.setTitle(x.getTitle());
-                        poolList.setCoordenadas(x.getCoordenadas());
-                        rellenarPoolList.add(poolList);
-                    }
-                }
-                poolAdapter = new PoolAdapter(PoolActivity.this, rellenarPoolList, R.layout.activity_main );
-                //metemos el poolAdapter en nuestro LV
-                piscinasLv.setAdapter(poolAdapter);
-                //Este nos permite recargar cuando hay cambios
-                poolAdapter.notifyDataSetChanged();
+                mPiscinaAdapter= new PiscinasAdapter(PoolActivity.this, mLugarList);
+                mListView.setAdapter(mPiscinaAdapter);
+                mPiscinaAdapter.notifyDataSetChanged();
             }
+
             @Override
-            public void onFailure(Call<JsonResponsive> call, Throwable t) {
+            public void onFailure(Call<JsonResponse> call, Throwable t) {
 
             }
         });

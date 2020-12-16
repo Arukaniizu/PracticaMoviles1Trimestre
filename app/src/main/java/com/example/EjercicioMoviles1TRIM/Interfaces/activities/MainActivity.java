@@ -15,7 +15,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,25 +23,10 @@ import android.widget.Toast;
 
 
 import com.example.EjercicioMoviles1TRIM.Interfaces.Models.LocationModel;
-import com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants;
-import com.example.EjercicioMoviles1TRIM.Interfaces.common.PoolAdapter;
-import com.example.EjercicioMoviles1TRIM.Interfaces.domain.JsonResponsive;
-import com.example.EjercicioMoviles1TRIM.Interfaces.domain.PoolList;
 
-import com.example.EjercicioMoviles1TRIM.Interfaces.iface.PoolApi;
 import com.example.EjercicioMoviles1TRIM.Interfaces.services.GpsService;
 import com.example.EjercicioMoviles1TRIM.R;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.INTENT_LOCALIZATION_ACTION;
 import static com.example.EjercicioMoviles1TRIM.Interfaces.common.Constants.LONGITUDE;
@@ -102,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(locationIntent);
         }
         if (menuItem.getItemId() == R.id.centrosDeportivos) {
-            Intent intent = new Intent(MainActivity.this, PoolActivity.class);
+            Intent intent = new Intent(MainActivity.this, SportActivity.class);
             startActivity(intent);
         }
         if(menuItem.getItemId() == R.id.miPosicionFavorita){
@@ -112,6 +96,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (menuItem.getItemId() == R.id.paginasInteres) {
             Intent intent = new Intent(MainActivity.this, Interes.class);
+            startActivity(intent);
+        }
+        if (menuItem.getItemId() == R.id.piscinas) {
+            Intent intent = new Intent(MainActivity.this, PoolActivity.class);
+            startActivity(intent);
+        }
+        if (menuItem.getItemId() == R.id.CentrosPiscinasFavoritos) {
+            Intent intent = new Intent(MainActivity.this, FavActivity.class);
             startActivity(intent);
         }
         return false;

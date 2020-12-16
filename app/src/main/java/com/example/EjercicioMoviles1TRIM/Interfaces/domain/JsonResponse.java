@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class JsonResponsive {
+public class JsonResponse {
 
     @SerializedName("@graph")
     @Expose
-    public List<PoolList> results = null;
+    public List<Lugar> graph = null;
 
 
 
