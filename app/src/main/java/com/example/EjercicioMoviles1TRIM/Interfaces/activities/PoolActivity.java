@@ -31,11 +31,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PoolActivity extends AppCompatActivity {
-    private List<PoolList> mPoolList;
-    private ArrayList<PoolList> rellenarPoolList;
-    ListView piscinasLv;
-    PoolList poolList;
-    PoolAdapter poolAdapter;
+
+
     Double latitude = 40.4173208;
     Double longitude = -3.7063557;
     int  distance = 8000;
@@ -58,6 +55,7 @@ public class PoolActivity extends AppCompatActivity {
             contextMenu.add(0, 1 , 0,"Add to favorites");
             contextMenu.add(0, 2 , 0,"Go to");
         });
+
         /*mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
